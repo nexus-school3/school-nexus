@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS — Your School, Connected</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f6f6f2;
+            color: #171717;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 6%;
+            border-bottom: 1px solid #ddd;
+            background: #f6f6f2;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            font-size: 14px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #171717;
+            cursor: pointer;
+        }
+
+        .hero {
+            padding: 80px 6% 50px;
+            max-width: 1000px;
+        }
+
+        .small-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 64px;
+            line-height: 0.95;
+            letter-spacing: -4px;
+            max-width: 800px;
+        }
+
+        .hero p {
+            margin-top: 25px;
+            font-size: 19px;
+            line-height: 1.5;
+            max-width: 600px;
+            color: #555;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+        }
+
+        button {
+            border: none;
+            padding: 14px 22px;
+            border-radius: 30px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .primary {
+            background: #b7ff35;
+            color: #111;
+        }
+
+        .secondary {
+            background: #171717;
+            color: white;
+        }
+
+        .section {
+            padding: 40px 6%;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            padding: 25px;
+            border-radius: 20px;
+            min-height: 180px;
+            background: white;
+            border: 1px solid #ddd;
+        }
+
+        .card.green {
+            background: #b7ff35;
+        }
+
+        .card.dark {
+            background: #171717;
+            color: white;
+        }
+
+        .card.orange {
+            background: #ffb45c;
+        }
+
+        .card h3 {
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .dark p {
+            color: #ccc;
+        }
+
+        .green p,
+        .orange p {
+            color: #222;
+        }
+
+        .event {
+            margin-top: 12px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 35px 6%;
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+
+        @media (max-width: 700px) {
+            h1 {
+                font-size: 45px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">NEXUS</div>
+
+        <div class="nav-links">
+            <a href="#events">Events</a>
+            <a href="#learn">Learn</a>
+            <a href="#clubs">Clubs</a>
+            <a href="#media">Media</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="small-title">Your school, connected.</div>
+
+        <h1>
+            Make school<br>
+            more interesting.
+        </h1>
+
+        <p>
+            Discover events, find your people, learn something new
+            and stay connected with what's happening around your school.
+        </p>
+
+        <div class="buttons">
+            <button class="primary" onclick="document.getElementById('events').scrollIntoView()">
+                Explore events
+            </button>
+
+            <button class="secondary" onclick="document.getElementById('learn').scrollIntoView()">
+                Learn & play
+            </button>
+        </div>
+    </section>
+
+    <section class="section" id="events">
+
+        <div class="section-title">🔥 What's happening?</div>
+
+        <div class="cards">
+
+            <div class="card green">
+                <h3>Volleyball Tournament</h3>
+                <p>18 September · Sports Hall</p>
+
+                <div class="event">
+                    Grades 8–10 · 15:00
+                </div>
+            </div>
+
+            <div class="card orange">
+                <h3>Volunteer Meeting</h3>
+                <p>20 September · Room 204</p>
+
+                <div class="event">
+                    Everyone is welcome.
+                </div>
+            </div>
+
+            <div class="card dark">
+                <h3>School Quiz</h3>
+                <p>22 September · Assembly Hall</p>
+
+                <div class="event">
+                    Teams of 3–5 students.
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" id="learn">
+
+        <div class="section-title">🧠 Learn & Play</div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Question of the day</h3>
+                <p>
+                    Which organelle is known as the
+                    "powerhouse of the cell"?
+                </p>
+
+                <br>
+
+                <button class="primary" onclick="alert('Correct answer: Mitochondria 🧬')">
+                    Show answer
+                </button>
+            </div>
+
+            <div class="card">
+                <h3>5-minute quiz</h3>
+                <p>
+                    Test your knowledge of science,
+                    history and culture.
+                </p>
+
+                <br>
+
+                <button class="secondary" onclick="alert('Quiz coming soon!')">
+                    Start quiz
+                </button>
+            </div>
+
+            <div class="card green">
+                <h3>Fact of the day</h3>
+                <p>
+                    A day on Venus is longer than a year on Venus.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" id="clubs">
+
+        <div class="section-title">👥 Find your people</div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>🧬 Biology Club</h3>
+                <p>
+                    Biology, olympiad preparation and
+                    interesting experiments.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>⚛️ Physics Club</h3>
+                <p>
+                    Problems, experiments and
+                    physics discussions.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>📚 Book Club</h3>
+                <p>
+                    Read. Discuss. Discover.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" id="media">
+
+        <div class="section-title">📰 School Media</div>
+
+        <div class="cards">
+
+            <div class="card dark">
+                <h3>How did the tournament go?</h3>
+                <p>
+                    A look back at this week's school
+                    volleyball tournament.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Meet our volunteers</h3>
+                <p>
+                    The students behind the next
+                    school events.
+                </p>
+            </div>
+
+            <div class="card orange">
+                <h3>5 things you didn't know</h3>
+                <p>
+                    Interesting facts about our school.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        NEXUS · Your school. Your people. Your opportunities.
+    </footer>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS — Your School, Connected</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f6f6f2;
+            color: #171717;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 6%;
+            border-bottom: 1px solid #ddd;
+            background: #f6f6f2;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            font-size: 14px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #171717;
+            cursor: pointer;
+        }
+
+        .hero {
+            padding: 80px 6% 50px;
+            max-width: 1000px;
+        }
+
+        .small-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 64px;
+            line-height: 0.95;
+            letter-spacing: -4px;
+            max-width: 800px;
+        }
+
+        .hero p {
+            margin-top: 25px;
+            font-size: 19px;
+            line-height: 1.5;
+            max-width: 600px;
+            color: #555;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+        }
+
+        button {
+            border: none;
+            padding: 14px 22px;
+            border-radius: 30px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .primary {
+            background: #b7ff35;
+            color: #111;
+        }
+
+        .secondary {
+            background: #171717;
+            color: white;
+        }
+
+        .section {
+            padding: 40px 6%;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            padding: 25px;
+            border-radius: 20px;
+            min-height: 180px;
+            background: white;
+            border: 1px solid #ddd;
+        }
+
+        .card.green {
+            background: #b7ff35;
+        }
+
+        .card.dark {
+            background: #171717;
+            color: white;
+        }
+
+        .card.orange {
+            background: #ffb45c;
+        }
+
+        .card h3 {
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .dark p {
+            color: #ccc;
+        }
+
+        .green p,
+        .orange p {
+            color: #222;
+        }
+
+        .event {
+            margin-top: 12px;
+            padding: 15px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 35px 6%;
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+
+        @media (max-width: 700px) {
+            h1 {
+                font-size: 45px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">NEXUS</div>
+
+        <div class="nav-links">
+            <a href="#events">Events</a>
+            <a href="#learn">Learn</a>
+            <a href="#clubs">Clubs</a>
+            <a href="#media">Media</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="small-title">Your school, connected.</div>
+
+        <h1>
+            Make school<br>
+            more interesting.
+        </h1>
+
+        <p>
+            Discover events, find your people, learn something new
+            and stay connected with what's happening around your school.
+        </p>
+
+        <div class="buttons">
+            <button class="primary" onclick="document.getElementById('events').scrollIntoView()">
+                Explore events
+            </button>
+
+            <button class="secondary" onclick="document.getElementById('learn').scrollIntoView()">
+                Learn & play
+            </button>
+        </div>
+    </section>
+
+    <section class="section" id="events">
+
+        <div class="section-title">🔥 What's happening?</div>
+
+        <div class="cards">
+
+            <div class="card green">
+                <h3>Volleyball Tournament</h3>
+                <p>18 September · Sports Hall</p>
+
+                <div class="event">
+                    Grades 8–10 · 15:00
+                </div>
+            </div>
+
+            <div class="card orange">
+                <h3>Volunteer Meeting</h3>
+                <p>20 September · Room 204</p>
+
+                <div class="event">
+                    Everyone is welcome.
+                </div>
+            </div>
+
+            <div class="card dark">
+                <h3>School Quiz</h3>
+                <p>22 September · Assembly Hall</p>
+
+                <div class="event">
+                    Teams of 3–5 students.
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" id="learn">
+
+        <div class="section-title">🧠 Learn & Play</div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Question of the day</h3>
+                <p>
+                    Which organelle is known as the
+                    "powerhouse of the cell"?
+                </p>
+
+                <br>
+
+                <button class="primary" onclick="alert('Correct answer: Mitochondria 🧬')">
+                    Show answer
+                </button>
+            </div>
+
+            <div class="card">
+                <h3>5-minute quiz</h3>
+                <p>
+                    Test your knowledge of science,
+                    history and culture.
+                </p>
+
+                <br>
+
+                <button class="secondary" onclick="alert('Quiz coming soon!')">
+                    Start quiz
+                </button>
+            </div>
+
+            <div class="card green">
+                <h3>Fact of the day</h3>
+                <p>
+                    A day on Venus is longer than a year on Venus.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" id="clubs">
+
+        <div class="section-title">👥 Find your people</div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>🧬 Biology Club</h3>
+                <p>
+                    Biology, olympiad preparation and
+                    interesting experiments.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>⚛️ Physics Club</h3>
+                <p>
+                    Problems, experiments and
+                    physics discussions.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>📚 Book Club</h3>
+                <p>
+                    Read. Discuss. Discover.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" id="media">
+
+        <div class="section-title">📰 School Media</div>
+
+        <div class="cards">
+
+            <div class="card dark">
+                <h3>How did the tournament go?</h3>
+                <p>
+                    A look back at this week's school
+                    volleyball tournament.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Meet our volunteers</h3>
+                <p>
+                    The students behind the next
+                    school events.
+                </p>
+            </div>
+
+            <div class="card orange">
+                <h3>5 things you didn't know</h3>
+                <p>
+                    Interesting facts about our school.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        NEXUS · Your school. Your people. Your opportunities.
+    </footer>
+
+</body>
+</html>
