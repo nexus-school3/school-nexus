@@ -1,747 +1,1628 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS — Your School, Connected!</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<title>NEXUS — Гимназия №3</title>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f6f6f2;
-            color: #171717;
-        }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 22px 6%;
-            border-bottom: 1px solid #ddd;
-            background: #f6f6f2;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        .logo {
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
+:root {
+    --blue: #123B72;
+    --blue-dark: #09294F;
+    --ochre: #C99A45;
+    --cream: #F5F3ED;
+    --white: #FFFFFF;
+    --text: #142033;
+    --muted: #687386;
+    --line: #D9DDE3;
+}
 
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            font-size: 14px;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        .nav-links a {
-            text-decoration: none;
-            color: #171717;
-            cursor: pointer;
-        }
+body {
+    font-family: "DM Sans", sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+}
 
-        .hero {
-            padding: 80px 6% 50px;
-            max-width: 1000px;
-        }
+button,
+a {
+    font-family: inherit;
+}
 
-        .small-title {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
+button {
+    cursor: pointer;
+}
 
-        h1 {
-            font-size: 64px;
-            line-height: 0.95;
-            letter-spacing: -4px;
-            max-width: 800px;
-        }
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(245, 243, 237, 0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+}
 
-        .hero p {
-            margin-top: 25px;
-            font-size: 19px;
-            line-height: 1.5;
-            max-width: 600px;
-            color: #555;
-        }
+.nav {
+    max-width: 1400px;
+    margin: auto;
+    padding: 18px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
 
-        .buttons {
-            margin-top: 30px;
-            display: flex;
-            gap: 12px;
-        }
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
 
-        button {
-            border: none;
-            padding: 14px 22px;
-            border-radius: 30px;
-            font-size: 15px;
-            cursor: pointer;
-        }
+.logo-mark {
+    width: 38px;
+    height: 38px;
+    background: var(--blue);
+    color: white;
+    display: grid;
+    place-items: center;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+    border-radius: 8px;
+}
 
-        .primary {
-            background: #b7ff35;
-            color: #111;
-        }
+.logo-text {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
 
-        .secondary {
-            background: #171717;
-            color: white;
-        }
+.logo-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: 4px;
+}
 
-        .section {
-            padding: 40px 6%;
-        }
+.nav-links {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
-        .section-title {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
+.nav-links button {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 0;
+}
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
+.nav-links button:hover,
+.nav-links button.active {
+    color: var(--blue);
+}
 
-        .card {
-            padding: 25px;
-            border-radius: 20px;
-            min-height: 180px;
-            background: white;
-            border: 1px solid #ddd;
-        }
+.menu-button {
+    display: none;
+    border: 1px solid var(--line);
+    background: white;
+    border-radius: 9px;
+    padding: 9px 12px;
+    font-size: 18px;
+}
 
-        .card.green {
-            background: #b7ff35;
-        }
+.page {
+    display: none;
+}
 
-        .card.dark {
-            background: #171717;
-            color: white;
-        }
+.page.active {
+    display: block;
+}
 
-        .card.orange {
-            background: #ffb45c;
-        }
+.container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 0 5%;
+}
 
-        .card h3 {
-            font-size: 21px;
-            margin-bottom: 12px;
-        }
+.hero {
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    padding: 80px 0;
+}
 
-        .card p {
-            line-height: 1.5;
-            color: #555;
-        }
+.hero-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 70px;
+    align-items: center;
+}
 
-        .dark p {
-            color: #ccc;
-        }
+.eyebrow {
+    color: var(--ochre);
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
 
-        .green p,
-        .orange p {
-            color: #222;
-        }
+.hero h1 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(54px, 8vw, 105px);
+    line-height: 0.9;
+    letter-spacing: -6px;
+    color: var(--blue);
+}
 
-        .event {
-            margin-top: 12px;
-            padding: 15px;
-            background: rgba(255,255,255,0.7);
-            border-radius: 12px;
-        }
+.hero h1 span {
+    color: var(--ochre);
+}
 
-        footer {
-            margin-top: 50px;
-            padding: 35px 6%;
-            border-top: 1px solid #ddd;
-            color: #666;
-        }
+.hero-description {
+    max-width: 570px;
+    margin-top: 30px;
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--muted);
+}
 
-        @media (max-width: 700px) {
-            h1 {
-                font-size: 45px;
-            }
+.hero-note {
+    margin-top: 35px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--blue);
+    padding-bottom: 7px;
+    color: var(--blue);
+    font-weight: 600;
+}
 
-            .cards {
-                grid-template-columns: 1fr;
-            }
+.hero-visual {
+    min-height: 430px;
+    background: var(--blue);
+    border-radius: 28px;
+    position: relative;
+    overflow: hidden;
+    padding: 35px;
+    color: white;
+}
 
-            .nav-links {
-                display: none;
-            }
+.hero-visual::before {
+    content: "";
+    position: absolute;
+    width: 270px;
+    height: 270px;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 50%;
+    right: -90px;
+    top: -60px;
+}
 
-            .hero {
-                padding-top: 50px;
-            }
-        }
-    </style>
+.hero-visual::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 50%;
+    left: -70px;
+    bottom: -60px;
+}
+
+.visual-number {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 15px;
+    color: rgba(255,255,255,.6);
+}
+
+.visual-content {
+    position: absolute;
+    left: 35px;
+    bottom: 35px;
+}
+
+.visual-content h2 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 42px;
+    line-height: 1;
+    margin-bottom: 15px;
+}
+
+.visual-content p {
+    color: rgba(255,255,255,.7);
+    max-width: 280px;
+    line-height: 1.5;
+}
+
+.section {
+    padding: 90px 0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.section-label {
+    color: var(--ochre);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--blue);
+    font-size: clamp(36px, 5vw, 62px);
+    letter-spacing: -3px;
+    line-height: .95;
+}
+
+.section-description {
+    max-width: 440px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.hub-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.hub-card {
+    min-height: 220px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .25s ease;
+}
+
+.hub-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--blue);
+}
+
+.hub-card.blue {
+    background: var(--blue);
+    color: white;
+}
+
+.hub-card.ochre {
+    background: var(--ochre);
+}
+
+.hub-card.lab {
+    background: #E7EBF1;
+}
+
+.hub-number {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 13px;
+    opacity: .55;
+}
+
+.hub-card h3 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 31px;
+    margin-top: 60px;
+}
+
+.hub-card p {
+    margin-top: 8px;
+    color: var(--muted);
+    line-height: 1.5;
+    max-width: 360px;
+}
+
+.blue p {
+    color: rgba(255,255,255,.7);
+}
+
+.arrow {
+    position: absolute;
+    right: 25px;
+    bottom: 22px;
+    font-size: 24px;
+}
+
+.content-page {
+    padding: 90px 0;
+    min-height: calc(100vh - 80px);
+}
+
+.page-intro {
+    max-width: 850px;
+    margin-bottom: 55px;
+}
+
+.page-intro h1 {
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--blue);
+    font-size: clamp(48px, 7vw, 85px);
+    line-height: .92;
+    letter-spacing: -5px;
+}
+
+.page-intro p {
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 650px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 25px;
+    min-height: 210px;
+}
+
+.card-tag {
+    color: var(--ochre);
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.card h3 {
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--blue);
+    font-size: 24px;
+    margin-top: 18px;
+}
+
+.card p {
+    margin-top: 10px;
+    color: var(--muted);
+    line-height: 1.55;
+}
+
+.card-button {
+    margin-top: 22px;
+    border: 1px solid var(--blue);
+    background: transparent;
+    color: var(--blue);
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.card-button:hover {
+    background: var(--blue);
+    color: white;
+}
+
+.schedule-selector {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.class-button {
+    padding: 10px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    background: white;
+    color: var(--text);
+}
+
+.class-button.active,
+.class-button:hover {
+    background: var(--blue);
+    color: white;
+    border-color: var(--blue);
+}
+
+.schedule-table {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.schedule-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 1fr 1fr 1fr;
+    border-bottom: 1px solid var(--line);
+}
+
+.schedule-row:last-child {
+    border-bottom: 0;
+}
+
+.schedule-row > div {
+    padding: 17px;
+    border-right: 1px solid var(--line);
+}
+
+.schedule-row > div:last-child {
+    border-right: 0;
+}
+
+.schedule-head {
+    background: var(--blue);
+    color: white;
+    font-weight: 600;
+}
+
+.calendar {
+    margin-top: 50px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 25px;
+}
+
+.calendar-title {
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--blue);
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.day {
+    min-height: 75px;
+    border: 1px solid #E3E5E9;
+    padding: 8px;
+    font-size: 12px;
+}
+
+.day.event-day {
+    background: #E8EDF5;
+    border-color: var(--blue);
+}
+
+.event-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--ochre);
+    border-radius: 50%;
+    margin-top: 12px;
+}
+
+.featured-media {
+    background: var(--blue);
+    color: white;
+    border-radius: 22px;
+    padding: 38px;
+    margin-bottom: 20px;
+}
+
+.featured-media .card-tag {
+    color: var(--ochre);
+}
+
+.featured-media h2 {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(32px, 5vw, 58px);
+    line-height: 1;
+    max-width: 800px;
+    margin-top: 18px;
+}
+
+.featured-media p {
+    margin-top: 18px;
+    color: rgba(255,255,255,.72);
+    max-width: 650px;
+    line-height: 1.6;
+}
+
+.club-category {
+    margin-bottom: 50px;
+}
+
+.club-category h2 {
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--blue);
+    font-size: 30px;
+    margin-bottom: 18px;
+}
+
+.opportunity {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 25px;
+}
+
+.deadline {
+    color: var(--ochre);
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 14px;
+}
+
+.idea-box {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.idea-box textarea {
+    width: 100%;
+    min-height: 120px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 15px;
+    font-family: inherit;
+    resize: vertical;
+    margin-top: 15px;
+}
+
+.submit-button {
+    margin-top: 14px;
+    background: var(--blue);
+    color: white;
+    border: 0;
+    padding: 13px 20px;
+    border-radius: 22px;
+    font-weight: 600;
+}
+
+.status {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.status.review {
+    background: #F2E7C9;
+    color: #785817;
+}
+
+.status.work {
+    background: #DCE6F4;
+    color: var(--blue);
+}
+
+.status.done {
+    background: #DDEBDD;
+    color: #315D37;
+}
+
+.lab-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.lab-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 30px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.lab-card h2 {
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--blue);
+    font-size: 30px;
+}
+
+.lab-result {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 25px 0;
+    font-size: 22px;
+    line-height: 1.35;
+}
+
+.generate {
+    border: 0;
+    background: var(--blue);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 25px;
+    font-weight: 700;
+    align-self: flex-start;
+}
+
+.generate:hover {
+    background: var(--blue-dark);
+}
+
+footer {
+    border-top: 1px solid var(--line);
+    padding: 30px 5%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+@media (max-width: 900px) {
+    .nav-links {
+        display: none;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-visual {
+        min-height: 330px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .schedule-row {
+        min-width: 800px;
+    }
+
+    .schedule-table {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav {
+        padding: 13px 5%;
+    }
+
+    .logo-sub {
+        display: none;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 60px 0;
+    }
+
+    .hero h1 {
+        font-size: 58px;
+        letter-spacing: -4px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+    }
+
+    .hero-visual {
+        min-height: 280px;
+    }
+
+    .section,
+    .content-page {
+        padding: 65px 0;
+    }
+
+    .hub-grid,
+    .cards,
+    .lab-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hub-card {
+        min-height: 180px;
+    }
+
+    .hub-card h3 {
+        margin-top: 40px;
+    }
+
+    .page-intro h1 {
+        font-size: 54px;
+    }
+
+    .calendar {
+        overflow-x: auto;
+    }
+
+    .calendar-grid {
+        min-width: 500px;
+    }
+
+    footer {
+        flex-direction: column;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <nav>
-        <div class="logo">NEXUS</div>
+<header class="site-header">
+    <nav class="nav">
+
+        <div class="logo" onclick="showPage('home')">
+            <div class="logo-mark">N</div>
+            <div>
+                <div class="logo-text">NEXUS</div>
+                <div class="logo-sub">Гимназия №3</div>
+            </div>
+        </div>
 
         <div class="nav-links">
-            <a href="#events">Events</a>
-            <a href="#learn">Learn</a>
-            <a href="#clubs">Clubs</a>
-            <a href="#media">Media</a>
+            <button onclick="showPage('home')">Главная</button>
+            <button onclick="showPage('schedule')">Расписание</button>
+            <button onclick="showPage('events')">События</button>
+            <button onclick="showPage('media')">Медиа</button>
+            <button onclick="showPage('clubs')">Клубы</button>
+            <button onclick="showPage('opportunities')">Возможности</button>
+            <button onclick="showPage('ideas')">Идеи</button>
+            <button onclick="showPage('lab')">NEXUS LAB</button>
         </div>
+
+        <button class="menu-button" onclick="toggleMobileMenu()">☰</button>
+
     </nav>
+</header>
 
-    <section class="hero">
-        <div class="small-title">Your school, connected.</div>
 
-        <h1>
-            Make school<br>
-            more interesting.
-        </h1>
+<!-- ГЛАВНАЯ -->
 
-        <p>
-            Discover events, find your people, learn something new
-            and stay connected with what's happening around your school.
-        </p>
+<main id="home" class="page active">
 
-        <div class="buttons">
-            <button class="primary" onclick="document.getElementById('events').scrollIntoView()">
-                Explore events
-            </button>
+    <div class="container">
 
-            <button class="secondary" onclick="document.getElementById('learn').scrollIntoView()">
-                Learn & play
-            </button>
+        <section class="hero">
+
+            <div class="hero-grid">
+
+                <div>
+                    <div class="eyebrow">Your school. Your people. Your opportunities.</div>
+
+                    <h1>
+                        Всё для<br>
+                        твоей <span>школы.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        NEXUS объединяет расписание, события, школьное медиа,
+                        клубы, возможности и идеи в одном месте.
+                    </p>
+
+                    <div class="hero-note">
+                        Исследуй гимназию по-новому →
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="visual-number">03 / NEXUS</div>
+
+                    <div class="visual-content">
+                        <h2>CONNECT.<br>DISCOVER.<br>CREATE.</h2>
+                        <p>
+                            Пространство, где школьная жизнь становится
+                            доступнее, интереснее и ближе.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <div>
+                    <div class="section-label">Explore NEXUS</div>
+                    <h2 class="section-title">С чего начнём?</h2>
+                </div>
+
+                <p class="section-description">
+                    Всё важное находится в нескольких кликах.
+                    Выбирай раздел и исследуй.
+                </p>
+
+            </div>
+
+
+            <div class="hub-grid">
+
+                <div class="hub-card blue" onclick="showPage('schedule')">
+                    <div class="hub-number">01</div>
+                    <h3>Расписание</h3>
+                    <p>Найди свои уроки и планируй день.</p>
+                    <div class="arrow">↗</div>
+                </div>
+
+                <div class="hub-card" onclick="showPage('events')">
+                    <div class="hub-number">02</div>
+                    <h3>События</h3>
+                    <p>Турниры, встречи, конкурсы и всё, что происходит в гимназии.</p>
+                    <div class="arrow">↗</div>
+                </div>
+
+                <div class="hub-card ochre" onclick="showPage('media')">
+                    <div class="hub-number">03</div>
+                    <h3>Медиа</h3>
+                    <p>Новости, интервью, репортажи и истории учеников.</p>
+                    <div class="arrow">↗</div>
+                </div>
+
+                <div class="hub-card" onclick="showPage('clubs')">
+                    <div class="hub-number">04</div>
+                    <h3>Клубы</h3>
+                    <p>Найди людей со схожими интересами и присоединяйся.</p>
+                    <div class="arrow">↗</div>
+                </div>
+
+                <div class="hub-card blue" onclick="showPage('opportunities')">
+                    <div class="hub-number">05</div>
+                    <h3>Возможности</h3>
+                    <p>Олимпиады, конкурсы, программы и проекты за пределами школы.</p>
+                    <div class="arrow">↗</div>
+                </div>
+
+                <div class="hub-card" onclick="showPage('ideas')">
+                    <div class="hub-number">06</div>
+                    <h3>Идеи</h3>
+                    <p>Предлагай изменения и следи за тем, что с ними происходит.</p>
+                    <div class="arrow">↗</div>
+                </div>
+
+                <div class="hub-card lab" onclick="showPage('lab')">
+                    <div class="hub-number">07</div>
+                    <h3>NEXUS LAB</h3>
+                    <p>Случайные идеи, вопросы, выборы и факты. Просто потому что интересно.</p>
+                    <div class="arrow">✦</div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- РАСПИСАНИЕ -->
+
+<section id="schedule" class="page">
+
+    <div class="container content-page">
+
+        <div class="page-intro">
+            <div class="eyebrow">Your day</div>
+            <h1>Расписание.</h1>
+            <p>
+                Выбери свой класс и быстро посмотри расписание.
+                Здесь позже можно будет добавить все классы гимназии.
+            </p>
         </div>
-    </section>
 
-    <section class="section" id="events">
+        <div class="schedule-selector">
+            <button class="class-button active">8А</button>
+            <button class="class-button">8Б</button>
+            <button class="class-button">8В</button>
+            <button class="class-button">9А</button>
+            <button class="class-button">9Б</button>
+            <button class="class-button">10А</button>
+            <button class="class-button">10Б</button>
+            <button class="class-button">11А</button>
+        </div>
 
-        <div class="section-title">🔥 What's happening?</div>
+        <div class="schedule-table">
 
-        <div class="cards">
-
-            <div class="card green">
-                <h3>Volleyball Tournament</h3>
-                <p>18 September · Sports Hall</p>
-
-                <div class="event">
-                    Grades 8–10 · 15:00
-                </div>
+            <div class="schedule-row schedule-head">
+                <div>№</div>
+                <div>Пн</div>
+                <div>Вт</div>
+                <div>Ср</div>
+                <div>Чт</div>
+                <div>Пт</div>
             </div>
 
-            <div class="card orange">
-                <h3>Volunteer Meeting</h3>
-                <p>20 September · Room 204</p>
-
-                <div class="event">
-                    Everyone is welcome.
-                </div>
+            <div class="schedule-row">
+                <div>1</div>
+                <div>Математика</div>
+                <div>Английский</div>
+                <div>Физика</div>
+                <div>История</div>
+                <div>Биология</div>
             </div>
 
-            <div class="card dark">
-                <h3>School Quiz</h3>
-                <p>22 September · Assembly Hall</p>
+            <div class="schedule-row">
+                <div>2</div>
+                <div>Русский язык</div>
+                <div>Математика</div>
+                <div>Литература</div>
+                <div>Химия</div>
+                <div>Математика</div>
+            </div>
 
-                <div class="event">
-                    Teams of 3–5 students.
-                </div>
+            <div class="schedule-row">
+                <div>3</div>
+                <div>Физика</div>
+                <div>История</div>
+                <div>Английский</div>
+                <div>Математика</div>
+                <div>Информатика</div>
+            </div>
+
+            <div class="schedule-row">
+                <div>4</div>
+                <div>Биология</div>
+                <div>Химия</div>
+                <div>География</div>
+                <div>Русский язык</div>
+                <div>Физкультура</div>
+            </div>
+
+            <div class="schedule-row">
+                <div>5</div>
+                <div>Информатика</div>
+                <div>Литература</div>
+                <div>Математика</div>
+                <div>Английский</div>
+                <div>Классный час</div>
             </div>
 
         </div>
-    </section>
 
-    <section class="section" id="learn">
+    </div>
 
-        <div class="section-title">🧠 Learn & Play</div>
+</section>
+
+
+<!-- СОБЫТИЯ -->
+
+<section id="events" class="page">
+
+    <div class="container content-page">
+
+        <div class="page-intro">
+            <div class="eyebrow">What's happening?</div>
+            <h1>События.</h1>
+            <p>
+                Всё, что происходит в гимназии: турниры, встречи,
+                конкурсы, собрания и школьные проекты.
+            </p>
+        </div>
 
         <div class="cards">
 
             <div class="card">
-                <h3>Question of the day</h3>
+                <div class="card-tag">18 сентября · Спорт</div>
+                <h3>Волейбольный турнир</h3>
                 <p>
-                    Which organelle is known as the
-                    "powerhouse of the cell"?
+                    Спортивный зал · 15:00<br>
+                    8–10 классы
                 </p>
-
-                <br>
-
-                <button class="primary" onclick="alert('Correct answer: Mitochondria 🧬')">
-                    Show answer
+                <button class="card-button" onclick="alert('Здесь позже появятся все подробности события.')">
+                    Подробнее
                 </button>
             </div>
 
             <div class="card">
-                <h3>5-minute quiz</h3>
+                <div class="card-tag">20 сентября · Волонтёрство</div>
+                <h3>Встреча волонтёров</h3>
                 <p>
-                    Test your knowledge of science,
-                    history and culture.
+                    Кабинет 204 · 14:30<br>
+                    Открыто для всех.
                 </p>
-
-                <br>
-
-                <button class="secondary" onclick="alert('Quiz coming soon!')">
-                    Start quiz
+                <button class="card-button" onclick="alert('Здесь позже появятся все подробности события.')">
+                    Подробнее
                 </button>
             </div>
 
-            <div class="card green">
-                <h3>Fact of the day</h3>
+            <div class="card">
+                <div class="card-tag">22 сентября · Quiz</div>
+                <h3>Школьный квиз</h3>
                 <p>
-                    A day on Venus is longer than a year on Venus.
+                    Актовый зал · 15:00<br>
+                    Команды по 3–5 человек.
                 </p>
+                <button class="card-button" onclick="alert('Здесь позже появятся все подробности события.')">
+                    Подробнее
+                </button>
             </div>
 
         </div>
-    </section>
 
-    <section class="section" id="clubs">
 
-        <div class="section-title">👥 Find your people</div>
+        <div class="calendar">
+
+            <div class="calendar-title">Сентябрь 2026</div>
+
+            <div class="calendar-grid">
+
+                <div class="day"><b>Пн</b></div>
+                <div class="day"><b>Вт</b></div>
+                <div class="day"><b>Ср</b></div>
+                <div class="day"><b>Чт</b></div>
+                <div class="day"><b>Пт</b></div>
+                <div class="day"><b>Сб</b></div>
+                <div class="day"><b>Вс</b></div>
+
+                <div class="day"></div>
+                <div class="day">1</div>
+                <div class="day">2</div>
+                <div class="day">3</div>
+                <div class="day">4</div>
+                <div class="day">5</div>
+                <div class="day">6</div>
+
+                <div class="day">7</div>
+                <div class="day">8</div>
+                <div class="day">9</div>
+                <div class="day">10</div>
+                <div class="day">11</div>
+                <div class="day">12</div>
+                <div class="day">13</div>
+
+                <div class="day">14</div>
+                <div class="day">15</div>
+                <div class="day">16</div>
+                <div class="day">17</div>
+                <div class="day event-day">
+                    18
+                    <div class="event-dot"></div>
+                </div>
+                <div class="day">19</div>
+                <div class="day event-day">
+                    20
+                    <div class="event-dot"></div>
+                </div>
+
+                <div class="day">21</div>
+                <div class="day event-day">
+                    22
+                    <div class="event-dot"></div>
+                </div>
+                <div class="day">23</div>
+                <div class="day">24</div>
+                <div class="day">25</div>
+                <div class="day">26</div>
+                <div class="day">27</div>
+
+                <div class="day">28</div>
+                <div class="day">29</div>
+                <div class="day">30</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- МЕДИА -->
+
+<section id="media" class="page">
+
+    <div class="container content-page">
+
+        <div class="page-intro">
+            <div class="eyebrow">School Media</div>
+            <h1>Медиа.</h1>
+            <p>
+                Школьная жизнь глазами самих учеников.
+                Новости, интервью, репортажи, мнения и культура.
+            </p>
+        </div>
+
+        <div class="featured-media">
+            <div class="card-tag">Главный материал</div>
+            <h2>Что происходит в гимназии, когда заканчиваются уроки?</h2>
+            <p>
+                Истории людей, которые создают школьную жизнь:
+                организаторы, волонтёры, участники клубов и ученики.
+            </p>
+        </div>
 
         <div class="cards">
 
             <div class="card">
-                <h3>🧬 Biology Club</h3>
-                <p>
-                    Biology, olympiad preparation and
-                    interesting experiments.
-                </p>
+                <div class="card-tag">Интервью</div>
+                <h3>Познакомьтесь с нашими волонтёрами</h3>
+                <p>Кто они, зачем начали помогать и что планируют дальше.</p>
             </div>
 
             <div class="card">
-                <h3>⚛️ Physics Club</h3>
-                <p>
-                    Problems, experiments and
-                    physics discussions.
-                </p>
+                <div class="card-tag">Репортаж</div>
+                <h3>Как прошёл турнир?</h3>
+                <p>Фотографии, результаты и атмосфера школьного события.</p>
             </div>
 
             <div class="card">
-                <h3>📚 Book Club</h3>
-                <p>
-                    Read. Discuss. Discover.
-                </p>
+                <div class="card-tag">Культура</div>
+                <h3>5 вещей, которые стоит посмотреть</h3>
+                <p>Фильмы, книги, музыка и другие находки учеников.</p>
             </div>
 
         </div>
-    </section>
 
-    <section class="section" id="media">
+    </div>
 
-        <div class="section-title">📰 School Media</div>
+</section>
+
+
+<!-- КЛУБЫ -->
+
+<section id="clubs" class="page">
+
+    <div class="container content-page">
+
+        <div class="page-intro">
+            <div class="eyebrow">Find your people</div>
+            <h1>Клубы.</h1>
+            <p>
+                Места, где можно заниматься тем, что действительно интересно,
+                и найти людей со схожими интересами.
+            </p>
+        </div>
+
+        <div class="club-category">
+
+            <h2>STEM</h2>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="card-tag">Science</div>
+                    <h3>Биология</h3>
+                    <p>Олимпиадная подготовка, эксперименты и обсуждение науки.</p>
+                    <button class="card-button">Подробнее</button>
+                </div>
+
+                <div class="card">
+                    <div class="card-tag">Science</div>
+                    <h3>Химия</h3>
+                    <p>Практика, эксперименты и подготовка к олимпиадам.</p>
+                    <button class="card-button">Подробнее</button>
+                </div>
+
+                <div class="card">
+                    <div class="card-tag">STEM</div>
+                    <h3>Физика</h3>
+                    <p>Задачи, эксперименты и интересные физические явления.</p>
+                    <button class="card-button">Подробнее</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="club-category">
+
+            <h2>People & Ideas</h2>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="card-tag">Media</div>
+                    <h3>Журналистика</h3>
+                    <p>Интервью, фотографии, статьи и школьные репортажи.</p>
+                    <button class="card-button">Подробнее</button>
+                </div>
+
+                <div class="card">
+                    <div class="card-tag">Community</div>
+                    <h3>Волонтёрство</h3>
+                    <p>Помощь школе, социальные проекты и мероприятия.</p>
+                    <button class="card-button">Подробнее</button>
+                </div>
+
+                <div class="card">
+                    <div class="card-tag">Leadership</div>
+                    <h3>Школьный парламент</h3>
+                    <p>Проекты, инициативы и развитие школьного сообщества.</p>
+                    <button class="card-button">Подробнее</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ВОЗМОЖНОСТИ -->
+
+<section id="opportunities" class="page">
+
+    <div class="container content-page">
+
+        <div class="page-intro">
+            <div class="eyebrow">Go beyond school</div>
+            <h1>Возможности.</h1>
+            <p>
+                Олимпиады, конкурсы, образовательные программы,
+                проекты и другие возможности за пределами обычных уроков.
+            </p>
+        </div>
 
         <div class="cards">
 
-            <div class="card dark">
-                <h3>How did the tournament go?</h3>
+            <div class="card">
+                <div class="card-tag">Olympiad</div>
+                <h3>Республиканская олимпиада</h3>
                 <p>
-                    A look back at this week's school
-                    volleyball tournament.
+                    Возможность проверить свои знания и представить школу
+                    на следующем уровне.
                 </p>
+                <div class="deadline">Дедлайн: 30 сентября</div>
+                <button class="card-button">Открыть</button>
             </div>
 
             <div class="card">
-                <h3>Meet our volunteers</h3>
+                <div class="card-tag">Competition</div>
+                <h3>Конкурс школьных проектов</h3>
                 <p>
-                    The students behind the next
-                    school events.
+                    Представь собственную идею, исследование или социальный проект.
                 </p>
+                <div class="deadline">Дедлайн: 10 октября</div>
+                <button class="card-button">Открыть</button>
             </div>
 
-            <div class="card orange">
-                <h3>5 things you didn't know</h3>
+            <div class="card">
+                <div class="card-tag">Program</div>
+                <h3>Образовательная программа</h3>
                 <p>
-                    Interesting facts about our school.
+                    Лекции, практика и новые знакомства с учениками
+                    из разных школ.
                 </p>
+                <div class="deadline">Дедлайн: уточняется</div>
+                <button class="card-button">Открыть</button>
             </div>
 
         </div>
-    </section>
 
-    <footer>
-        NEXUS · Your school. Your people. Your opportunities.
-    </footer>
+    </div>
 
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS — Your School, Connected</title>
+</section>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f6f6f2;
-            color: #171717;
-        }
+<!-- ИДЕИ -->
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 22px 6%;
-            border-bottom: 1px solid #ddd;
-            background: #f6f6f2;
-        }
+<section id="ideas" class="page">
 
-        .logo {
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
+    <div class="container content-page">
 
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            font-size: 14px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #171717;
-            cursor: pointer;
-        }
-
-        .hero {
-            padding: 80px 6% 50px;
-            max-width: 1000px;
-        }
-
-        .small-title {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            font-size: 64px;
-            line-height: 0.95;
-            letter-spacing: -4px;
-            max-width: 800px;
-        }
-
-        .hero p {
-            margin-top: 25px;
-            font-size: 19px;
-            line-height: 1.5;
-            max-width: 600px;
-            color: #555;
-        }
-
-        .buttons {
-            margin-top: 30px;
-            display: flex;
-            gap: 12px;
-        }
-
-        button {
-            border: none;
-            padding: 14px 22px;
-            border-radius: 30px;
-            font-size: 15px;
-            cursor: pointer;
-        }
-
-        .primary {
-            background: #b7ff35;
-            color: #111;
-        }
-
-        .secondary {
-            background: #171717;
-            color: white;
-        }
-
-        .section {
-            padding: 40px 6%;
-        }
-
-        .section-title {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .card {
-            padding: 25px;
-            border-radius: 20px;
-            min-height: 180px;
-            background: white;
-            border: 1px solid #ddd;
-        }
-
-        .card.green {
-            background: #b7ff35;
-        }
-
-        .card.dark {
-            background: #171717;
-            color: white;
-        }
-
-        .card.orange {
-            background: #ffb45c;
-        }
-
-        .card h3 {
-            font-size: 21px;
-            margin-bottom: 12px;
-        }
-
-        .card p {
-            line-height: 1.5;
-            color: #555;
-        }
-
-        .dark p {
-            color: #ccc;
-        }
-
-        .green p,
-        .orange p {
-            color: #222;
-        }
-
-        .event {
-            margin-top: 12px;
-            padding: 15px;
-            background: rgba(255,255,255,0.7);
-            border-radius: 12px;
-        }
-
-        footer {
-            margin-top: 50px;
-            padding: 35px 6%;
-            border-top: 1px solid #ddd;
-            color: #666;
-        }
-
-        @media (max-width: 700px) {
-            h1 {
-                font-size: 45px;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero {
-                padding-top: 50px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <nav>
-        <div class="logo">NEXUS</div>
-
-        <div class="nav-links">
-            <a href="#events">Events</a>
-            <a href="#learn">Learn</a>
-            <a href="#clubs">Clubs</a>
-            <a href="#media">Media</a>
+        <div class="page-intro">
+            <div class="eyebrow">Make it better</div>
+            <h1>Идеи.</h1>
+            <p>
+                Есть идея для гимназии? Предложи её и следи,
+                что происходит с ней дальше.
+            </p>
         </div>
-    </nav>
 
-    <section class="hero">
-        <div class="small-title">Your school, connected.</div>
+        <div class="idea-box">
 
-        <h1>
-            Make school<br>
-            more interesting.
-        </h1>
+            <h2>Предложить идею</h2>
 
-        <p>
-            Discover events, find your people, learn something new
-            and stay connected with what's happening around your school.
-        </p>
+            <textarea id="ideaInput" placeholder="Например: сделать больше мест для отдыха возле спортзала..."></textarea>
 
-        <div class="buttons">
-            <button class="primary" onclick="document.getElementById('events').scrollIntoView()">
-                Explore events
+            <button class="submit-button" onclick="submitIdea()">
+                + Отправить идею
             </button>
 
-            <button class="secondary" onclick="document.getElementById('learn').scrollIntoView()">
-                Learn & play
-            </button>
-        </div>
-    </section>
-
-    <section class="section" id="events">
-
-        <div class="section-title">🔥 What's happening?</div>
-
-        <div class="cards">
-
-            <div class="card green">
-                <h3>Volleyball Tournament</h3>
-                <p>18 September · Sports Hall</p>
-
-                <div class="event">
-                    Grades 8–10 · 15:00
-                </div>
-            </div>
-
-            <div class="card orange">
-                <h3>Volunteer Meeting</h3>
-                <p>20 September · Room 204</p>
-
-                <div class="event">
-                    Everyone is welcome.
-                </div>
-            </div>
-
-            <div class="card dark">
-                <h3>School Quiz</h3>
-                <p>22 September · Assembly Hall</p>
-
-                <div class="event">
-                    Teams of 3–5 students.
-                </div>
-            </div>
+            <p id="ideaMessage" style="margin-top:12px;color:#687386;"></p>
 
         </div>
-    </section>
 
-    <section class="section" id="learn">
-
-        <div class="section-title">🧠 Learn & Play</div>
 
         <div class="cards">
 
             <div class="card">
-                <h3>Question of the day</h3>
-                <p>
-                    Which organelle is known as the
-                    "powerhouse of the cell"?
-                </p>
+                <div class="card-tag">Предложено</div>
+                <h3>Больше мест для отдыха</h3>
+                <p>Поставить дополнительные скамейки возле спортивного зала.</p>
+                <span class="status review">На рассмотрении</span>
+            </div>
 
-                <br>
+            <div class="card">
+                <div class="card-tag">В работе</div>
+                <h3>Новый школьный клуб</h3>
+                <p>Создать клуб дебатов для учеников 8–11 классов.</p>
+                <span class="status work">В работе</span>
+            </div>
 
-                <button class="primary" onclick="alert('Correct answer: Mitochondria 🧬')">
-                    Show answer
+            <div class="card">
+                <div class="card-tag">Результат</div>
+                <h3>Школьный турнир</h3>
+                <p>Идея ученика превратилась в настоящее мероприятие.</p>
+                <span class="status done">Реализовано ✓</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NEXUS LAB -->
+
+<section id="lab" class="page">
+
+    <div class="container content-page">
+
+        <div class="page-intro">
+            <div class="eyebrow">Just for fun</div>
+            <h1>NEXUS LAB.</h1>
+            <p>
+                Иногда не нужно ничего полезного.
+                Просто нажми кнопку и посмотри, что выпадет.
+            </p>
+        </div>
+
+
+        <div class="lab-grid">
+
+            <div class="lab-card">
+
+                <h2>🎲 Или / Или</h2>
+
+                <div class="lab-result" id="choiceResult">
+                    Нажми кнопку — NEXUS выберет за тебя.
+                </div>
+
+                <button class="generate" onclick="generateChoice()">
+                    GENERATE
                 </button>
+
             </div>
 
-            <div class="card">
-                <h3>5-minute quiz</h3>
-                <p>
-                    Test your knowledge of science,
-                    history and culture.
-                </p>
 
-                <br>
+            <div class="lab-card">
 
-                <button class="secondary" onclick="alert('Quiz coming soon!')">
-                    Start quiz
+                <h2>💬 Случайный вопрос</h2>
+
+                <div class="lab-result" id="questionResult">
+                    Вопрос, который можно обсудить с кем угодно.
+                </div>
+
+                <button class="generate" onclick="generateQuestion()">
+                    GENERATE
                 </button>
+
             </div>
 
-            <div class="card green">
-                <h3>Fact of the day</h3>
-                <p>
-                    A day on Venus is longer than a year on Venus.
-                </p>
+
+            <div class="lab-card">
+
+                <h2>💡 Случайная идея</h2>
+
+                <div class="lab-result" id="ideaResult">
+                    Иногда лучший план — случайный.
+                </div>
+
+                <button class="generate" onclick="generateRandomIdea()">
+                    GENERATE
+                </button>
+
             </div>
 
-        </div>
-    </section>
 
-    <section class="section" id="clubs">
+            <div class="lab-card">
 
-        <div class="section-title">👥 Find your people</div>
+                <h2>🐢 Случайный факт</h2>
 
-        <div class="cards">
+                <div class="lab-result" id="factResult">
+                    Готов узнать что-нибудь странное?
+                </div>
 
-            <div class="card">
-                <h3>🧬 Biology Club</h3>
-                <p>
-                    Biology, olympiad preparation and
-                    interesting experiments.
-                </p>
-            </div>
+                <button class="generate" onclick="generateFact()">
+                    GENERATE
+                </button>
 
-            <div class="card">
-                <h3>⚛️ Physics Club</h3>
-                <p>
-                    Problems, experiments and
-                    physics discussions.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>📚 Book Club</h3>
-                <p>
-                    Read. Discuss. Discover.
-                </p>
             </div>
 
         </div>
-    </section>
 
-    <section class="section" id="media">
+    </div>
 
-        <div class="section-title">📰 School Media</div>
+</section>
 
-        <div class="cards">
 
-            <div class="card dark">
-                <h3>How did the tournament go?</h3>
-                <p>
-                    A look back at this week's school
-                    volleyball tournament.
-                </p>
-            </div>
+<footer>
+    <div>NEXUS · Гимназия №3</div>
+    <div>Your school. Your people. Your opportunities.</div>
+</footer>
 
-            <div class="card">
-                <h3>Meet our volunteers</h3>
-                <p>
-                    The students behind the next
-                    school events.
-                </p>
-            </div>
 
-            <div class="card orange">
-                <h3>5 things you didn't know</h3>
-                <p>
-                    Interesting facts about our school.
-                </p>
-            </div>
+<script>
 
-        </div>
-    </section>
+function showPage(pageId) {
 
-    <footer>
-        NEXUS · Your school. Your people. Your opportunities.
-    </footer>
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageId).classList.add('active');
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+
+const choices = [
+    "Посмотреть фильм 🎬 или начать новую книгу 📖?",
+    "Познакомиться с новым человеком или написать старому другу?",
+    "Пойти на новое мероприятие или остаться в своей зоне комфорта?",
+    "Учиться под музыку 🎧 или в полной тишине?",
+    "Путешествие в прошлое или в будущее?",
+    "Иметь возможность читать мысли или видеть будущее?"
+];
+
+function generateChoice() {
+
+    const result = choices[Math.floor(Math.random() * choices.length)];
+
+    document.getElementById("choiceResult").textContent = result;
+}
+
+
+const questions = [
+    "Если бы ты мог прожить один день в любой исторической эпохе — какую бы выбрал?",
+    "Какой навык ты бы хотел получить за одну ночь?",
+    "Если бы деньги вообще не имели значения, чем бы ты занимался?",
+    "С каким человеком из истории ты бы хотел поговорить?",
+    "Какой фильм ты хотел бы забыть, чтобы посмотреть его снова?",
+    "Если бы школа могла добавить один новый предмет — что бы это было?",
+    "Какое место ты хотел бы посетить больше всего?",
+    "Что ты умеешь делать лучше, чем большинство людей?"
+];
+
+function generateQuestion() {
+
+    const result = questions[Math.floor(Math.random() * questions.length)];
+
+    document.getElementById("questionResult").textContent = result;
+}
+
+
+const randomIdeas = [
+    "Найди человека из другого класса и узнай, чем он увлекается.",
+    "Зайди сегодня в школьное место, где ты обычно никогда не бываешь.",
+    "Попробуй новый клуб или мероприятие.",
+    "Найди фильм из страны, в которой ты никогда не был.",
+    "Узнай историю одного человека из своей школы.",
+    "Возьми тему, о которой ничего не знаешь, и узнай о ней три факта.",
+    "Сегодня скажи человеку что-нибудь приятное — просто так.",
+    "Попробуй сделать что-нибудь новым способом."
+];
+
+function generateRandomIdea() {
+
+    const result = randomIdeas[Math.floor(Math.random() * randomIdeas.length)];
+
+    document.getElementById("ideaResult").textContent = result;
+}
+
+
+const facts = [
+    "🐢 Некоторые черепахи могут получать кислород через ткани вокруг клоаки — поэтому иногда говорят, что они «дышат попой».",
+    "🍌 Банан — ботанически ягода, а клубника — нет.",
+    "🐙 У осьминога три сердца.",
+    "🌌 На Венере один оборот вокруг своей оси длится дольше, чем её год.",
+    "🦈 Акулы появились на Земле раньше, чем деревья.",
+    "🦩 Фламинго рождаются с серыми перьями, а не розовыми.",
+    "🍯 Мёд при правильном хранении может сохраняться очень долго.",
+    "🧠 Человеческий мозг сам по себе не имеет болевых рецепторов."
+];
+
+function generateFact() {
+
+    const result = facts[Math.floor(Math.random() * facts.length)];
+
+    document.getElementById("factResult").textContent = result;
+}
+
+
+function submitIdea() {
+
+    const input = document.getElementById("ideaInput");
+    const message = document.getElementById("ideaMessage");
+
+    if (input.value.trim() === "") {
+
+        message.textContent = "Напиши идею перед отправкой.";
+
+        return;
+    }
+
+    message.textContent =
+        "✓ Идея отправлена. В будущем здесь появится её статус.";
+
+    input.value = "";
+}
+
+
+function toggleMobileMenu() {
+
+    const nav = document.querySelector(".nav-links");
+
+    if (nav.style.display === "flex") {
+
+        nav.style.display = "";
+
+    } else {
+
+        nav.style.display = "flex";
+        nav.style.position = "absolute";
+        nav.style.top = "70px";
+        nav.style.left = "5%";
+        nav.style.right = "5%";
+        nav.style.background = "#F5F3ED";
+        nav.style.padding = "15px";
+        nav.style.border = "1px solid #D9DDE3";
+        nav.style.borderRadius = "14px";
+        nav.style.flexDirection = "column";
+    }
+}
+
+</script>
 
 </body>
 </html>
